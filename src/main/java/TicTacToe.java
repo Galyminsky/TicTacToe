@@ -16,14 +16,7 @@ public class TicTacToe {
 
         drawField(field);
         doPlayerMove(field);
-
-        Random random = new Random();
-        int h = random.nextInt(field.length);
-        int v = random.nextInt(field.length);
-        field[h][v] = '0';
-
-
-
+        doAIMove(field);
         drawField(field);
     }
 
