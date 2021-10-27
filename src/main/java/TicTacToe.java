@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -15,7 +16,26 @@ public class TicTacToe {
 
         drawField(field);
         doPlayerMove(field);
+
+        Random random = new Random();
+        int h = random.nextInt(field.length);
+        int v = random.nextInt(field.length);
+        field[h][v] = '0';
+
+
+
         drawField(field);
+    }
+
+    static void doAIMove (char[][] field) {
+        Random random = new Random();
+        int h, v;
+        do {
+            h = random.nextInt(field.length);
+            v = random.nextInt(field.length);
+        } while (field[h][v] != '-');
+
+        field[h][v] = '0';
     }
 
     static void doPlayerMove (char[][] field) {
@@ -24,9 +44,13 @@ public class TicTacToe {
             System.out.println("Please enter coordinate....");
             h = getCoordinate('h');
             v = getCoordinate('v');
-        } while (field[h][v] != '-');
+        } while (isCellEmpty(field, h, v));
 
         field[h][v] = 'x';
+    }
+
+    static boolean isCellEmpty (char[][] field, int h, int v) {
+        return field[h][v] != '-';
     }
 
     static int getCoordinate (char axis) {
